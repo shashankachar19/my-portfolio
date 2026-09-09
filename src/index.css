@@ -1,13 +1,227 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+@theme {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-label: 'IBM Plex Mono', monospace;
+
+  /* Brutalist color tokens */
+  --color-bg-primary: #0A0A0A;
+  --color-bg-elevated: #111111;
+  --color-bg-surface: #181818;
+  --color-text-primary: #F0F0F0;
+  --color-text-secondary: #777777;
+  --color-text-tertiary: #444444;
+  --color-accent: #BBFF00;
+  --color-border: #1E1E1E;
+  --color-border-hard: #2A2A2A;
+  --color-border-accent: #333333;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --accent-rgb: 187, 255, 0;
+}
+
+/* ═══════════════════════════════════════════════
+   BASE LAYER
+   ═══════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-mono antialiased overflow-x-hidden;
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #0A0A0A;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Brutalist — no rounded corners anywhere by default */
+  *, *::before, *::after {
+    border-radius: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════ */
+
+@layer utilities {
+
+  /* ── Exposed grid background ── */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .grid-bg-fine {
+    background-image:
+      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Section index label ── */
+  .section-idx {
+    @apply font-label text-[10px] uppercase tracking-[0.35em] text-text-tertiary;
+  }
+
+  /* ── Hard rule divider ── */
+  .hard-rule {
+    height: 1px;
+    background: var(--color-border-hard);
+    width: 100%;
+  }
+
+  .hard-rule-accent {
+    height: 2px;
+    background: var(--color-accent);
+    width: 100%;
+  }
+
+  /* ── Dot leader for data rows ── */
+  .dot-leader {
+    flex: 1;
+    border-bottom: 1px dotted var(--color-border-accent);
+    margin: 0 16px;
+    min-width: 30px;
+    position: relative;
+    bottom: 4px;
+  }
+
+  /* ── Brutalist card ── */
+  .brutal-card {
+    border: 1px solid var(--color-border-hard);
+    background: var(--color-bg-elevated);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .brutal-card:hover {
+    border-color: var(--color-accent);
+    background: var(--color-bg-surface);
+  }
+
+  /* ── Accent tag chip ── */
+  .tag-chip {
+    @apply font-label text-[10px] uppercase tracking-[0.2em] text-text-secondary border border-border-hard px-3 py-1.5;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .tag-chip:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* ── Link with underline reveal ── */
+  .link-brutal {
+    @apply font-label text-[11px] uppercase tracking-[0.25em] text-text-secondary;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .link-brutal::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-brutal:hover {
+    color: var(--color-accent);
+  }
+
+  .link-brutal:hover::after {
+    width: 100%;
+  }
+
+  /* ── Marquee (for experience ticker) ── */
+  .marquee-track {
+    display: flex;
+    animation: marquee-scroll 50s linear infinite;
+    width: max-content;
+  }
+
+  /* ── Accent glow ── */
+  .glow-accent {
+    box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.08);
+  }
+
+  .text-glow-accent {
+    text-shadow: 0 0 60px rgba(var(--accent-rgb), 0.12);
+  }
+
+  /* ── Noise texture overlay (subtle) ── */
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-size: 200px 200px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════ */
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes line-reveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ═══════════════════════════════════════════════
+   LENIS SCROLL
+   ═══════════════════════════════════════════════ */
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
