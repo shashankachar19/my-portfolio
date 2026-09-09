@@ -44,6 +44,16 @@ function App() {
     };
   }, [loaded]);
 
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   return (
     <>
       {/* Subtle noise overlay */}
@@ -55,9 +65,9 @@ function App() {
       {loaded && (
         <>
           {/* 3D Canvas — fixed background behind everything (like haoqi.design) */}
-          <HeroCanvas />
+          <HeroCanvas theme={theme} />
 
-          <Header />
+          <Header toggleTheme={toggleTheme} theme={theme} />
           <main className="relative z-10">
             <Hero />
 

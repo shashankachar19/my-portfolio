@@ -7,7 +7,10 @@
   --font-mono: 'Space Grotesk', sans-serif;
   --font-label: 'JetBrains Mono', monospace;
 
-  /* Brutalist color tokens */
+}
+
+:root {
+  /* Default (Dark Theme) - Brutalist color tokens */
   --color-bg-primary: #0A0A0A;
   --color-bg-elevated: #121212;
   --color-bg-surface: #1A1A1A;
@@ -18,10 +21,23 @@
   --color-border: #1F1F1F;
   --color-border-hard: #2B2B2B;
   --color-border-accent: #3A3A3A;
+
+  --accent-rgb: 224, 224, 224;
 }
 
-:root {
-  --accent-rgb: 224, 224, 224;
+[data-theme='light'] {
+  --color-bg-primary: #F5F5F5;
+  --color-bg-elevated: #EFEFEF;
+  --color-bg-surface: #E5E5E5;
+  --color-text-primary: #0A0A0A;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-accent: #111111;
+  --color-border: #DDDDDD;
+  --color-border-hard: #CCCCCC;
+  --color-border-accent: #BBBBBB;
+
+  --accent-rgb: 17, 17, 17;
 }
 
 /* ═══════════════════════════════════════════════
@@ -34,7 +50,9 @@
   }
 
   body {
-    @apply bg-bg-primary text-text-primary font-mono antialiased overflow-x-hidden;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    @apply font-mono antialiased overflow-x-hidden;
     scrollbar-width: none;
   }
 
@@ -81,7 +99,8 @@
 
   /* ── Section index label ── */
   .section-idx {
-    @apply font-label text-[10px] uppercase tracking-[0.35em] text-text-tertiary;
+    color: var(--color-text-tertiary);
+    @apply font-label text-[10px] uppercase tracking-[0.35em];
   }
 
   /* ── Hard rule divider ── */
@@ -121,7 +140,9 @@
 
   /* ── Accent tag chip ── */
   .tag-chip {
-    @apply font-label text-[10px] uppercase tracking-[0.2em] text-text-secondary border border-border-hard px-3 py-1.5;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-hard);
+    @apply font-label text-[10px] uppercase tracking-[0.2em] px-3 py-1.5;
     transition: border-color 0.2s, color 0.2s;
   }
 
@@ -132,7 +153,8 @@
 
   /* ── Link with underline reveal ── */
   .link-brutal {
-    @apply font-label text-[11px] uppercase tracking-[0.25em] text-text-secondary;
+    color: var(--color-text-secondary);
+    @apply font-label text-[11px] uppercase tracking-[0.25em];
     position: relative;
     transition: color 0.3s;
   }
