@@ -14,14 +14,14 @@
   --color-text-primary: #F0F0F0;
   --color-text-secondary: #777777;
   --color-text-tertiary: #444444;
-  --color-accent: #BBFF00;
+  --color-accent: #D9FF00;
   --color-border: #1E1E1E;
   --color-border-hard: #2A2A2A;
   --color-border-accent: #333333;
 }
 
 :root {
-  --accent-rgb: 187, 255, 0;
+  --accent-rgb: 217, 255, 0;
 }
 
 /* ═══════════════════════════════════════════════
@@ -67,15 +67,15 @@
   /* ── Exposed grid background ── */
   .grid-bg {
     background-image:
-      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 80px 80px;
   }
 
   .grid-bg-fine {
     background-image:
-      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 

@@ -4,29 +4,38 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 const projects = [
   {
     idx: '001',
-    title: 'Pacha Cover',
-    tags: ['Python', 'Node.js', 'Google OAuth', 'AI', 'Satellite Data'],
+    title: 'Amazon Clone',
+    tags: ['MERN Stack', 'Auth', 'Test Suite', 'Modern UI'],
     description:
-      "Uses satellite data, AI, and citizen science to identify urban heat islands across Bengaluru's 198 BBMP wards. Mobilises residents to restore the city's disappearing tree canopy one adopted spot at a time.",
-    github: 'https://github.com/shashankachar19',
+      'A full-featured clone of Amazon showcasing a modern UI, robust authentication, and comprehensive test suite.',
+    github: 'https://github.com/shashankachar19/Amazon-replica',
     live: null,
   },
   {
     idx: '002',
-    title: 'AI-Muse Research Platform',
-    tags: ['MongoDB', 'Node.js', 'Gemini API', 'Full-Stack'],
+    title: 'SkillSwap',
+    tags: ['MERN Platform', 'Real-time Video', 'Chat'],
     description:
-      'Full-stack web application for AI-powered research on any topic. Integrates Google Gemini API to generate accurate, context-aware research summaries. Built with MongoDB, Node.js, and Express.',
-    github: 'https://github.com/shashankachar19',
+      'A platform built on the MERN stack facilitating real-time video and chat for users to exchange skills dynamically.',
+    github: 'https://github.com/shashankachar19/SkillSwap',
     live: null,
   },
   {
     idx: '003',
-    title: 'Slice',
-    tags: ['Computer Vision', 'OCR', 'Algorithms', 'FinTech'],
+    title: 'Research Muse AI',
+    tags: ['Groq', 'Streamlit', 'Taxonomy Classification', 'Gemini API'],
     description:
-      'Bill-splitting application that reads receipt images, extracts line items via OCR, and helps a group dynamically split costs in a shared lobby. Handles complex receipt parsing and real-time calculation.',
-    github: 'https://github.com/shashankachar19/Slice',
+      'An AI-powered research platform leveraging Groq and Streamlit for taxonomy classification and context-aware research summaries using Gemini.',
+    github: 'https://github.com/shashankachar19/research-muse-ai',
+    live: null,
+  },
+  {
+    idx: '004',
+    title: 'Pacha Cover',
+    tags: ['Python', 'Node.js', 'AI', 'Satellite Data'],
+    description:
+      "Uses satellite data, AI, and citizen science to identify urban heat islands across Bengaluru's 198 BBMP wards. Mobilises residents to restore the city's tree canopy.",
+    github: 'https://github.com/shashankachar19',
     live: null,
   },
 ];
