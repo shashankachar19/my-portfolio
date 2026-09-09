@@ -16,11 +16,11 @@ A premium, brutalist-inspired personal portfolio website built with modern web t
 
 ## Key Features
 
-- **Brutalist Premium Aesthetic:** High-contrast, monochromatic dark theme with electric lime-green (`#ccff00`) accents.
-- **Interactive 3D Elements:** A floating, interactive chrome Torus Knot in the hero section built with React Three Fiber.
-- **Liquid Typography:** Organic, wavy text distortion utilizing custom SVG `feTurbulence` and `feDisplacementMap` filters.
+- **Premium Brutalism Aesthetic:** High-contrast, stark monochromatic theme with black and silver/chrome accents using Syne and Space Grotesk typography.
+- **Interactive 3D Elements:** Custom WebGL/GLSL fluid shaders and floating image-based stickers leveraging React Three Fiber and Drei.
+- **Liquid Typography:** Organic, wavy text distortion utilizing custom SVG `feTurbulence` and `feDisplacementMap` filters on brutalist fonts.
 - **Smooth Scroll & Parallax:** Butter-smooth scrolling using Lenis, coupled with Framer Motion scroll-linked parallax animations.
-- **Dynamic Layouts:** Blueprint-style grids, live crosshairs, and a custom status bar reflecting real-time IST and cursor coordinates.
+- **Dynamic Layouts:** Architectural grid structures, layered elements, and high-impact UI elements replacing standard elements.
 
 ## Local Development
 
