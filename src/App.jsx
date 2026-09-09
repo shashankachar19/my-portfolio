@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Stack from './components/Stack';
 import Contact from './components/Contact';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +55,7 @@ function App() {
 
       {loaded && (
         <>
+          <CustomCursor />
           {/* 3D Canvas — fixed background behind everything (like haoqi.design) */}
           <HeroCanvas />
 

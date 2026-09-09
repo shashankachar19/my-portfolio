@@ -46,12 +46,25 @@ function ProjectCard({ title, idx, tags, description, github, live }) {
     target: cardRef,
     offset: ['start end', 'end start'],
   });
-  const rawY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+
+  // Parallax and 3D rotation based on scroll position
+  const rawY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const titleY = useSpring(rawY, { stiffness: 60, damping: 20 });
+
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [10, 0, -10]);
+  const rotateSpringX = useSpring(rotateX, { stiffness: 100, damping: 30 });
+
+  const opacityTransform = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.3]);
 
   return (
     <motion.article
       ref={cardRef}
+      style={{
+        rotateX: rotateSpringX,
+        opacity: opacityTransform,
+        perspective: 1000,
+        transformStyle: "preserve-3d"
+      }}
       className="w-full py-14 md:py-20 px-6 lg:px-10 border-b border-border-hard group relative overflow-hidden"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}

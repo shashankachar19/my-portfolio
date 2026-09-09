@@ -1,64 +1,114 @@
-import { useRef, Suspense } from 'react';
+import { useRef, useMemo, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Float, Environment, MeshTransmissionMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
-/* ─── Premium Liquid Glass Object ─── */
-function LiquidGlassShape() {
+const vertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const fragmentShader = `
+  uniform float uTime;
+  uniform vec2 uMouse;
+  uniform vec2 uResolution;
+  varying vec2 vUv;
+
+  // Simple noise function
+  float noise(vec2 p) {
+    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+  }
+
+  // Fractal Brownian Motion
+  float fbm(vec2 p) {
+    float f = 0.0;
+    float w = 0.5;
+    for (int i = 0; i < 5; i++) {
+      f += w * noise(p);
+      p *= 2.0;
+      w *= 0.5;
+    }
+    return f;
+  }
+
+  void main() {
+    vec2 st = gl_FragCoord.xy / uResolution.xy;
+    st.x *= uResolution.x / uResolution.y;
+
+    // Distort coordinates over time
+    vec2 q = vec2(0.);
+    q.x = fbm(st + 0.00 * uTime);
+    q.y = fbm(st + vec2(1.0));
+
+    vec2 r = vec2(0.);
+    r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.15 * uTime);
+    r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.126 * uTime);
+
+    // Mouse interaction
+    vec2 mouseEffect = uMouse * 0.5 - 0.25;
+    r += mouseEffect;
+
+    float f = fbm(st + r);
+
+    // Color mixing (monochrome premium look)
+    vec3 color = mix(
+      vec3(0.02, 0.02, 0.02), // Dark base
+      vec3(0.1, 0.1, 0.1),    // Subtle light highlight
+      clamp((f * f) * 4.0, 0.0, 1.0)
+    );
+
+    // Accent color swirl (lime green)
+    vec3 accent = vec3(0.85, 1.0, 0.0); // #D9FF00 equivalent
+    color = mix(color, accent, clamp(length(q) * 0.1, 0.0, 1.0));
+
+    // Vignette
+    vec2 p = gl_FragCoord.xy / uResolution.xy;
+    float vignette = smoothstep(2.0, 0.1, length(p - 0.5));
+    color *= vignette;
+
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+
+function LiquidShaderPlane() {
   const meshRef = useRef();
-  const { pointer } = useThree();
+  const { size, pointer } = useThree();
+
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uResolution: { value: new THREE.Vector2(size.width, size.height) },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+    }),
+    [size]
+  );
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.elapsedTime;
+    meshRef.current.material.uniforms.uTime.value = t;
 
-    // Smooth mouse-follow rotation
-    meshRef.current.rotation.x = THREE.MathUtils.lerp(
-      meshRef.current.rotation.x,
-      pointer.y * 0.3 + Math.sin(t * 0.3) * 0.2,
-      0.02
+    // Smooth mouse follow
+    meshRef.current.material.uniforms.uMouse.value.lerp(
+      new THREE.Vector2(pointer.x, pointer.y),
+      0.05
     );
-    meshRef.current.rotation.y = THREE.MathUtils.lerp(
-      meshRef.current.rotation.y,
-      pointer.x * 0.4 + t * 0.2,
-      0.02
-    );
-
-    // Morphing effect by scaling axes slightly
-    meshRef.current.scale.x = 1 + Math.sin(t * 0.5) * 0.05;
-    meshRef.current.scale.y = 1 + Math.cos(t * 0.4) * 0.05;
-    meshRef.current.scale.z = 1 + Math.sin(t * 0.6) * 0.05;
   });
 
   return (
-    <Float speed={1.5} floatIntensity={1} rotationIntensity={0.5}>
-      <mesh ref={meshRef} position={[0, 0, 0]} castShadow receiveShadow>
-        {/* Icosahedron with detail for a multifaceted, complex look */}
-        <icosahedronGeometry args={[2.5, 3]} />
-        <MeshTransmissionMaterial
-          backside
-          samples={4}
-          thickness={1.5}
-          chromaticAberration={0.05}
-          anisotropy={0.3}
-          distortion={0.5}
-          distortionScale={0.5}
-          temporalDistortion={0.1}
-          iridescence={1}
-          iridescenceIOR={1.3}
-          iridescenceThicknessRange={[100, 400]}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-          transmission={1}
-          roughness={0}
-          ior={1.5}
-          color="#ffffff"
-          attenuationColor="#bbff00"
-          attenuationDistance={10}
-          background={new THREE.Color('#000000')}
-        />
-      </mesh>
-    </Float>
+    <mesh ref={meshRef} position={[0, 0, -1]}>
+      {/* Plane that covers the whole screen */}
+      <planeGeometry args={[100, 100]} />
+      <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+        transparent={true}
+        depthWrite={false}
+      />
+    </mesh>
   );
 }
 
@@ -108,16 +158,13 @@ export default function HeroCanvas() {
         dpr={[1, 2]}
       >
         <Suspense fallback={null}>
-          {/* Dramatic brutalist lighting */}
           <ambientLight intensity={0.2} />
           <directionalLight position={[10, 10, 5]} intensity={3} color="#ffffff" />
           <directionalLight position={[-10, -10, -5]} intensity={1} color="#bbff00" />
           <pointLight position={[0, 0, 5]} intensity={2} color="#ffffff" />
 
-          <Environment preset="city" />
-
           <LightRays />
-          <LiquidGlassShape />
+          <LiquidShaderPlane />
         </Suspense>
       </Canvas>
     </div>

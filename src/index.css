@@ -31,11 +31,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    cursor: none; /* Hide default cursor */
   }
 
   body {
     @apply bg-bg-primary text-text-primary font-mono antialiased overflow-x-hidden;
     scrollbar-width: none;
+    cursor: none;
   }
 
   body::-webkit-scrollbar {
