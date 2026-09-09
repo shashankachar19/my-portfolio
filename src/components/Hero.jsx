@@ -81,7 +81,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.span
             className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-text-primary"
-            style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7rem)' }}
+            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
@@ -92,7 +92,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.span
             className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-text-primary"
-            style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7rem)' }}
+            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
@@ -104,7 +104,7 @@ export default function Hero() {
         <div className="overflow-hidden">
           <motion.span
             className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-accent"
-            style={{ fontSize: 'clamp(2.5rem, 7.5vw, 7rem)' }}
+            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
