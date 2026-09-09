@@ -28,12 +28,6 @@ function useLiquidFreq() {
   return freq;
 }
 
-const NAV_LINKS = [
-  { label: 'Profile', id: 'profile' },
-  { label: 'Work',    id: 'work' },
-  { label: 'Contact', id: 'contact' },
-];
-
 export default function HeroSection() {
   const time  = useLiveClock();
   const freq  = useLiquidFreq();

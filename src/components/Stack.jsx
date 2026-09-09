@@ -19,7 +19,7 @@ const stack = [
   },
   {
     category: 'Exploring',
-    items: ['Docker', 'Three.js', 'Cybersecurity', 'REST APIs', 'Gemini API'],
+    items: ['Docker', 'Three.js', 'REST APIs', 'Gemini API'],
   },
 ];
 
