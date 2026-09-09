@@ -22,15 +22,6 @@ const projects = [
   },
   {
     idx: '003',
-    title: 'Research Muse AI',
-    tags: ['Groq', 'Streamlit', 'Taxonomy Classification', 'Gemini API'],
-    description:
-      'An AI-powered research platform leveraging Groq and Streamlit for taxonomy classification and context-aware research summaries using Gemini.',
-    github: 'https://github.com/shashankachar19/research-muse-ai',
-    live: null,
-  },
-  {
-    idx: '004',
     title: 'Pacha Cover',
     tags: ['Python', 'Node.js', 'AI', 'Satellite Data'],
     description:
@@ -142,7 +133,7 @@ export default function Projects() {
       </div>
 
       <div className="border-t border-border-hard">
-        {projects.map((p) => (
+        {projects.filter(p => p.title).map((p) => (
           <ProjectCard key={p.idx} {...p} />
         ))}
       </div>
