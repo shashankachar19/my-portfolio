@@ -2,10 +2,10 @@
 
 A premium, brutalist-inspired personal portfolio website built with modern web technologies. Designed with a focus on deep aesthetics, 3D elements, and smooth interactions to showcase engineering projects, experience, and skills.
 
-## 🚀 Live Demo
+## Live Demo
 *(Add your live URL here once deployed, e.g., Vercel or Netlify)*
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
@@ -14,7 +14,7 @@ A premium, brutalist-inspired personal portfolio website built with modern web t
 - **Smooth Scrolling:** [Lenis](https://github.com/darkroomengineering/lenis)
 - **Icons:** [Lucide React](https://lucide.dev/)
 
-## ✨ Key Features
+## Key Features
 
 - **Brutalist Premium Aesthetic:** High-contrast, monochromatic dark theme with electric lime-green (`#ccff00`) accents.
 - **Interactive 3D Elements:** A floating, interactive chrome Torus Knot in the hero section built with React Three Fiber.
@@ -22,7 +22,7 @@ A premium, brutalist-inspired personal portfolio website built with modern web t
 - **Smooth Scroll & Parallax:** Butter-smooth scrolling using Lenis, coupled with Framer Motion scroll-linked parallax animations.
 - **Dynamic Layouts:** Blueprint-style grids, live crosshairs, and a custom status bar reflecting real-time IST and cursor coordinates.
 
-## 💻 Local Development
+## Local Development
 
 1. **Clone the repository:**
    ```bash
@@ -46,5 +46,5 @@ A premium, brutalist-inspired personal portfolio website built with modern web t
    npm run build
    ```
 
-## 📄 License
+## License
 This project is open-source and available under the [MIT License](LICENSE).
