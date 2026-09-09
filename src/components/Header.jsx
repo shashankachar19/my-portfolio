@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'Contact', id: 'contact' },
 ];
 
-export default function Header() {
+export default function Header({ toggleTheme, theme }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -38,12 +38,21 @@ export default function Header() {
       >
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo / Name */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-display font-bold text-base md:text-lg uppercase tracking-[0.08em] text-text-primary hover:text-accent transition-colors duration-300"
-          >
-            SS<span className="text-accent">.</span>
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="font-display font-bold text-base md:text-lg uppercase tracking-[0.08em] text-text-primary hover:text-accent transition-colors duration-300"
+            >
+              SHASHANK S<span className="text-accent">.</span>
+            </button>
+
+            <button
+              onClick={toggleTheme}
+              className="font-label text-[10px] px-2 py-1 border border-border-hard hover:border-accent text-text-secondary hover:text-accent transition-colors"
+            >
+              {theme === 'dark' ? 'LIGHT' : 'DARK'} MODE
+            </button>
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">

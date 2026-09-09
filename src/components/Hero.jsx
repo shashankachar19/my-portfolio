@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import TechSticker from './TechSticker';
 
 function useLiveClock() {
   const [t, setT] = useState('--:--');
@@ -70,49 +71,77 @@ export default function Hero() {
 
         <motion.div className="col-span-12 lg:col-span-4 lg:col-start-9 p-2" {...fadeIn(0.7)}>
           <p className="font-mono text-xs uppercase tracking-wider leading-relaxed text-text-secondary">
-            I'm Shashank S, a 3rd year ISE student at MIT Mysore. Full-stack developer,
+            I'm Shashank S, a 4th year ISE student at MIT Mysore. Full-stack developer,
             hackathon builder, and cloud enthusiast shipping real-world systems.
           </p>
         </motion.div>
       </div>
 
-      {/* ── BOTTOM: Statement text ── */}
-      <div className="relative z-10 col-span-12 self-end flex flex-col px-2 pb-12">
-        <div className="overflow-hidden">
+      {/* ── BOTTOM: Statement text (Massive Overlapping Typography like haoqi.design) ── */}
+      <div className="relative z-10 col-span-12 self-center lg:self-end flex flex-col items-center lg:items-start px-2 pb-12 mix-blend-difference">
+        <div className="overflow-hidden -mb-4 lg:-mb-10 w-full text-center lg:text-left">
           <motion.span
-            className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-text-primary"
-            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
+            className="block font-display font-bold uppercase leading-[0.75] tracking-tighter text-text-primary whitespace-nowrap"
+            style={{ fontSize: 'clamp(4rem, 16vw, 16rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
           >
-            I build
+            SHASHANK
           </motion.span>
         </div>
-        <div className="overflow-hidden">
+        <div className="overflow-hidden -mb-4 lg:-mb-10 w-full text-center lg:text-left pl-0 lg:pl-12">
           <motion.span
-            className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-text-primary"
-            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
+            className="block font-display font-bold uppercase leading-[0.75] tracking-tighter text-accent whitespace-nowrap"
+            style={{ fontSize: 'clamp(4rem, 16vw, 16rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.05 }}
           >
-            real systems
+            SUDHEER
           </motion.span>
         </div>
-        <div className="overflow-hidden">
+        <div className="overflow-hidden w-full text-center lg:text-left pl-0 lg:pl-24">
           <motion.span
-            className="block font-display font-bold uppercase leading-[0.88] tracking-tighter text-accent"
-            style={{ fontSize: 'clamp(3rem, 10vw, 10rem)' }}
+            className="block font-display font-bold uppercase leading-[0.75] tracking-tighter text-text-primary whitespace-nowrap opacity-60 mix-blend-overlay"
+            style={{ fontSize: 'clamp(3rem, 12vw, 12rem)' }}
             variants={nameReveal}
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.1 }}
           >
-            that work.
+            FULLSTACK
           </motion.span>
         </div>
+      </div>
+
+      {/* ── DRAGGABLE TECH STICKERS ── */}
+      <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden">
+        <TechSticker
+          label="React.js"
+          x="15%"
+          y="40%"
+          rotate={-12}
+        />
+        <TechSticker
+          label="AWS Cloud"
+          x="75%"
+          y="30%"
+          rotate={8}
+        />
+        <TechSticker
+          label="Node.js"
+          x="80%"
+          y="65%"
+          rotate={-6}
+        />
+        <TechSticker
+          label="MongoDB"
+          x="20%"
+          y="70%"
+          rotate={15}
+        />
       </div>
 
       {/* ── FOOTER STRIP (time left, coords center, links right) ── */}

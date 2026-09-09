@@ -59,13 +59,13 @@ export default function About() {
           <div className="mt-10 border-t border-border-hard pt-6">
             <p className="section-idx mb-3">Education</p>
             <p className="font-mono text-sm uppercase tracking-wider text-text-primary">
-              3rd Year — B.E. in Information Science
+              4th Year — B.E. in Information Science
             </p>
             <p className="font-label text-xs uppercase tracking-wider text-text-secondary mt-1">
               Maharaja Institute of Technology Mysore
             </p>
             <p className="font-label text-xs uppercase tracking-wider text-text-tertiary mt-1">
-              CGPA: 8.4 // 2023–2027
+              CGPA: 8.4 // 2021–2025
             </p>
           </div>
         </motion.div>
@@ -79,7 +79,7 @@ export default function About() {
           custom={0.1}
         >
           <p className="font-mono text-sm uppercase tracking-[0.06em] leading-[2] text-text-secondary">
-            I'm a 3rd year ISE student at MIT Mysore who loves building
+            I'm a 4th year ISE student at MIT Mysore who loves building
             full-stack applications from the ground up. I've competed in
             hackathons, shipped real projects, and I'm constantly exploring
             cloud computing, backend architecture, and how systems work
