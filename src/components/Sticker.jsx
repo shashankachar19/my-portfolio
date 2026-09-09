@@ -7,6 +7,7 @@ export default function Sticker({ url, position, scale = 1, rotationSpeed = 0.5,
   const meshRef = useRef();
   const texture = useTexture(url);
 
+
   const { pointer } = useThree();
 
   useFrame((state) => {

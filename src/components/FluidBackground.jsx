@@ -65,10 +65,27 @@ const fragmentShader = `
     // Create smoke/fluid pattern
     float n = snoise(pos + mouseEffect * 2.0);
 
+
+    // Mouse interaction distance
+    float dist = distance(st, mouse);
+    float mouseEffect = smoothstep(0.5, 0.0, dist);
+
+    pos.x += snoise(pos + uTime * 0.1) * 0.5;
+    pos.y += snoise(pos - uTime * 0.15) * 0.5;
+
+    // Create smoke/fluid pattern
+    float n = snoise(pos + mouseEffect * 2.0);
+
     // Smooth, premium monochrome silver styling
     // Dark background with subtle silver/chrome flowing highlights
     vec3 baseColor = vec3(0.03, 0.03, 0.03);
     vec3 highlight = vec3(0.25, 0.25, 0.25);
+
+    // Add extra brightness near mouse
+    float intensity = smoothstep(-1.0, 1.0, n) + (mouseEffect * 0.3);
+
+    vec3 finalColor = mix(baseColor, highlight, intensity * 0.5);
+
 
     // Add extra brightness near mouse
     float intensity = smoothstep(-1.0, 1.0, n) + (mouseEffect * 0.3);
